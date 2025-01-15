@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcClient";
+
+package greet;
+
+
+// Customer sersvice defination.
+service CustomerData {
+  // returns list of customers
+  rpc GetCustomers (Empty) returns (CustomerList);
+
+  rpc GetCustomersById (Id) returns (AddressList); // returns list of address by accepting id
+}
+
+
+// customer structure
+message Customer {
+
+  string name = 1;
+  string id =2;
+  
+}
+
+// The response msg of GetCustomers.
+message CustomerList {
+  repeated Customer custometrs =1;
+  bool isfailed = 2; // to check if any error occured in the grpc service
+  string errortxt = 3;
+
+  
+}
+
+message Empty{} //for empty input
+
+message Id  // The request msg for GetCustomersById
+{
+	string user_id = 1;
+}
+
+message Address  // structure of The address
+{
+	string building =1;
+	string area =2;
+	string city =3;
+	string state =4;
+	string pincode =5;
+	
+}
+
+message AddressList //response of GetCustomersById
+{
+	repeated Address addresses=1;
+	bool isfailed = 2;
+	string errortxt = 3;
+}

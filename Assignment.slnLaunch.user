@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "GrpcService1\\GrpcService1.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "WindowsFormsClient\\WindowsFormsClient.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
