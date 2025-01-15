@@ -10,12 +10,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Grpc.Net.Client;
 using GrpcClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace WindowsFormsClient
 {
     public partial class Form1 : Form
     {
+        string nametosearch = "";
         
         DataTable dt = new DataTable();
         DataTable dt2 = new DataTable();
@@ -27,12 +29,6 @@ namespace WindowsFormsClient
         public Form1()
         {
             InitializeComponent();
-            loaddata();
-
-        }
-
-        public void loaddata()
-        {
             dt.Columns.Add("Id");
             dt.Columns.Add("Name");
             dt2.Columns.Add("Building");
@@ -41,19 +37,20 @@ namespace WindowsFormsClient
             dt2.Columns.Add("State");
             dt2.Columns.Add("Pincode");
             dataGridView2.DataSource = dt;
-            dataGridView1.DataSource= dt2;
-
+            dataGridView1.DataSource = dt2;
+            loaddata();
 
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        public async  void loaddata()
         {
-
+            
 
             try
             {
                 var response = await client.GetCustomersAsync(new Empty());
-                if (response == null) {
+                if (response == null)
+                {
                     MessageBox.Show("Null response form grpc service");
                 }
                 if (response.Isfailed == true)
@@ -73,14 +70,23 @@ namespace WindowsFormsClient
                     foreach (var customer in customers)
                     {
                         dt.Rows.Add(customer.Id, customer.Name);
-                    } 
+                    }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                
+
             }
+
+
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+
+            loaddata();
+            
 
 
 
@@ -145,5 +151,44 @@ namespace WindowsFormsClient
         {
 
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            string searchValue = searchbox.Text.Trim();
+
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                // Apply a filter to the DataTable's DefaultView
+                dt.DefaultView.RowFilter = $"Name LIKE '{searchValue}%'";
+            }
+            else
+            {
+                // Clear the filter when the search box is empty
+                dt.DefaultView.RowFilter = string.Empty;
+            }
+
+
+            dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            try
+            {
+                foreach (DataGridViewRow row in dataGridView2.Rows)
+                {
+                    if (row.Cells[1].Value.ToString().ToLower().Equals(searchValue.ToLower()))
+                    {
+                        row.Selected = true;
+                        break;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
+
+       
+       
     }
 }
