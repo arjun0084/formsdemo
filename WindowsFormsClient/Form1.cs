@@ -149,7 +149,8 @@ namespace WindowsFormsClient
             if (!string.IsNullOrEmpty(searchValue))
             {
                 // Apply a filter to the DataTable's DefaultView
-                dt_user.DefaultView.RowFilter = $"First_Name or Last_Name LIKE '{searchValue}%'";
+                dt_user.DefaultView.RowFilter = $"First_Name LIKE '%{searchValue}%' OR Last_Name LIKE '%{searchValue}%'";
+
             }
             else
             {
@@ -240,8 +241,13 @@ namespace WindowsFormsClient
                             break;
                         }
                     }
-                    MessageBox.Show("Address Deleted Sucessfully");
-                    button2_Click(sender, e);   
+                  
+                    var result =MessageBox.Show("Address Deleted Sucessfully","Successful",MessageBoxButtons.OK);
+                    if (result == DialogResult.OK)
+                    {
+                        button2_Click(sender, e);
+                    }
+                    
 
                 }
                 else
@@ -266,11 +272,35 @@ namespace WindowsFormsClient
 
         private void addaddressbutton_Click(object sender, EventArgs e)
         {
-            var row = dataGridView2.SelectedRows[0];
-            string address_id = row.Cells[0].Value.ToString();
+            int count = dataGridView2.SelectedRows.Count;
+            if (count > 0)
+            {
+                var row = dataGridView2.SelectedRows[0];
+                string user_id = row.Cells[0].Value.ToString();
 
-            AddAddressForm form = new AddAddressForm(address_id);
-            form.Show();
+                AddAddressForm form = new AddAddressForm(user_id);
+                form.Show();
+            }
+        }
+
+        private void UpdateAddressbutton_Click(object sender, EventArgs e)
+        {
+            int count = dataGridView1.SelectedRows.Count;
+            if (count>0)
+            {
+                
+                var row = dataGridView1.SelectedRows[0];
+                string address_id = row.Cells[0].Value.ToString();
+
+                AddAddressForm form = new AddAddressForm(address_id,true);
+                form.textBox1.Text = row.Cells[1].Value.ToString();
+                form.textBox2.Text = row.Cells[2].Value.ToString();
+                form.textBox3.Text = row.Cells[3].Value.ToString();
+                form.textBox4.Text = row.Cells[4].Value.ToString();
+                form.textBox5.Text = row.Cells[5].Value.ToString();
+                form.button1.Text = "Update Address";
+                form.Show(); 
+            }
         }
     }
 }

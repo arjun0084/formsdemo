@@ -98,6 +98,14 @@ namespace GrpcService1 {
         __Marshaller_Status);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::GrpcService1.Address, global::GrpcService1.Status> __Method_UpdateAddress = new grpc::Method<global::GrpcService1.Address, global::GrpcService1.Status>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "UpdateAddress",
+        __Marshaller_Address,
+        __Marshaller_Status);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::GrpcService1.Id, global::GrpcService1.Status> __Method_DeleteUser = new grpc::Method<global::GrpcService1.Id, global::GrpcService1.Status>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -172,6 +180,18 @@ namespace GrpcService1 {
       }
 
       /// <summary>
+      ///updates the selected Address
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::GrpcService1.Status> UpdateAddress(global::GrpcService1.Address request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
       /// deletes the customer and its all addresses
       /// </summary>
       /// <param name="request">The request received from the client.</param>
@@ -207,6 +227,7 @@ namespace GrpcService1 {
           .AddMethod(__Method_GetCustomersById, serviceImpl.GetCustomersById)
           .AddMethod(__Method_AddCustomer, serviceImpl.AddCustomer)
           .AddMethod(__Method_AddAddress, serviceImpl.AddAddress)
+          .AddMethod(__Method_UpdateAddress, serviceImpl.UpdateAddress)
           .AddMethod(__Method_DeleteUser, serviceImpl.DeleteUser)
           .AddMethod(__Method_DeleteAddress, serviceImpl.DeleteAddress).Build();
     }
@@ -222,6 +243,7 @@ namespace GrpcService1 {
       serviceBinder.AddMethod(__Method_GetCustomersById, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcService1.Id, global::GrpcService1.AddressList>(serviceImpl.GetCustomersById));
       serviceBinder.AddMethod(__Method_AddCustomer, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcService1.Customer, global::GrpcService1.Status>(serviceImpl.AddCustomer));
       serviceBinder.AddMethod(__Method_AddAddress, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcService1.Address, global::GrpcService1.Status>(serviceImpl.AddAddress));
+      serviceBinder.AddMethod(__Method_UpdateAddress, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcService1.Address, global::GrpcService1.Status>(serviceImpl.UpdateAddress));
       serviceBinder.AddMethod(__Method_DeleteUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcService1.Id, global::GrpcService1.Status>(serviceImpl.DeleteUser));
       serviceBinder.AddMethod(__Method_DeleteAddress, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcService1.AddressId, global::GrpcService1.Status>(serviceImpl.DeleteAddress));
     }

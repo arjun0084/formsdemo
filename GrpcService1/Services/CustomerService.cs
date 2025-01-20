@@ -277,5 +277,49 @@ namespace GrpcService1.Services
         }
 
 
+        public async override Task<Status> UpdateAddress(Address request, ServerCallContext context)
+        {
+            try
+            {
+                int id = int.Parse(request.Id);
+                string building = request.Building;
+                string area = request.Area;
+                string city = request.City;
+                string state = request.State;
+                int pincode = int.Parse(request.Pincode);
+
+
+                using SqlConnection conn = new SqlConnection(connectionstring);
+                using SqlCommand cmd = new("updateaddress", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@id", id));
+                cmd.Parameters.Add(new SqlParameter("@building", building));
+                cmd.Parameters.Add(new SqlParameter("@area", area));
+                cmd.Parameters.Add(new SqlParameter("@city", city));
+                cmd.Parameters.Add(new SqlParameter("@state", state));
+                cmd.Parameters.Add(new SqlParameter("@pincode", pincode));
+
+                await conn.OpenAsync();
+                int noofrowsaffected = cmd.ExecuteNonQuery();
+
+                if (noofrowsaffected >= 0)
+                {
+                    Status status = new();
+                    return status;
+                }
+                else
+                {
+                    return new Status() { Isfailed = true };
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                return new Status { Isfailed = true, Errortxt = ex.Message };
+            }
+        }
+
+
     }
 }

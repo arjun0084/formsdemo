@@ -31,7 +31,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
+            this.fetchbutton = new System.Windows.Forms.Button();
             this.searchbox = new System.Windows.Forms.TextBox();
             this.label_search = new System.Windows.Forms.Label();
             this.label_Users = new System.Windows.Forms.Label();
@@ -40,13 +40,14 @@
             this.delete_address = new System.Windows.Forms.Button();
             this.adduserbutton = new System.Windows.Forms.Button();
             this.addaddressbutton = new System.Windows.Forms.Button();
+            this.UpdateAddressbutton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(594, 221);
+            this.button1.Location = new System.Drawing.Point(530, 220);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(138, 35);
             this.button1.TabIndex = 0;
@@ -83,15 +84,15 @@
             this.dataGridView2.TabIndex = 2;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
-            // button2
+            // fetchbutton
             // 
-            this.button2.Location = new System.Drawing.Point(594, 151);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(138, 38);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Fetch Address";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.fetchbutton.Location = new System.Drawing.Point(530, 151);
+            this.fetchbutton.Name = "fetchbutton";
+            this.fetchbutton.Size = new System.Drawing.Size(138, 38);
+            this.fetchbutton.TabIndex = 3;
+            this.fetchbutton.Text = "Fetch Address";
+            this.fetchbutton.UseVisualStyleBackColor = true;
+            this.fetchbutton.Click += new System.EventHandler(this.button2_Click);
             // 
             // searchbox
             // 
@@ -132,9 +133,9 @@
             // 
             // DeleteCustomer
             // 
-            this.DeleteCustomer.Location = new System.Drawing.Point(764, 151);
+            this.DeleteCustomer.Location = new System.Drawing.Point(701, 151);
             this.DeleteCustomer.Name = "DeleteCustomer";
-            this.DeleteCustomer.Size = new System.Drawing.Size(117, 38);
+            this.DeleteCustomer.Size = new System.Drawing.Size(131, 38);
             this.DeleteCustomer.TabIndex = 10;
             this.DeleteCustomer.Text = "Delete ";
             this.DeleteCustomer.UseVisualStyleBackColor = true;
@@ -142,7 +143,7 @@
             // 
             // delete_address
             // 
-            this.delete_address.Location = new System.Drawing.Point(764, 221);
+            this.delete_address.Location = new System.Drawing.Point(701, 220);
             this.delete_address.Name = "delete_address";
             this.delete_address.Size = new System.Drawing.Size(131, 34);
             this.delete_address.TabIndex = 11;
@@ -152,7 +153,7 @@
             // 
             // adduserbutton
             // 
-            this.adduserbutton.Location = new System.Drawing.Point(921, 151);
+            this.adduserbutton.Location = new System.Drawing.Point(864, 151);
             this.adduserbutton.Name = "adduserbutton";
             this.adduserbutton.Size = new System.Drawing.Size(118, 38);
             this.adduserbutton.TabIndex = 12;
@@ -162,7 +163,7 @@
             // 
             // addaddressbutton
             // 
-            this.addaddressbutton.Location = new System.Drawing.Point(921, 221);
+            this.addaddressbutton.Location = new System.Drawing.Point(864, 220);
             this.addaddressbutton.Name = "addaddressbutton";
             this.addaddressbutton.Size = new System.Drawing.Size(118, 34);
             this.addaddressbutton.TabIndex = 13;
@@ -170,12 +171,23 @@
             this.addaddressbutton.UseVisualStyleBackColor = true;
             this.addaddressbutton.Click += new System.EventHandler(this.addaddressbutton_Click);
             // 
+            // UpdateAddressbutton
+            // 
+            this.UpdateAddressbutton.Location = new System.Drawing.Point(1006, 218);
+            this.UpdateAddressbutton.Name = "UpdateAddressbutton";
+            this.UpdateAddressbutton.Size = new System.Drawing.Size(91, 36);
+            this.UpdateAddressbutton.TabIndex = 14;
+            this.UpdateAddressbutton.Text = "Update Address";
+            this.UpdateAddressbutton.UseVisualStyleBackColor = true;
+            this.UpdateAddressbutton.Click += new System.EventHandler(this.UpdateAddressbutton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.ClientSize = new System.Drawing.Size(1129, 551);
+            this.Controls.Add(this.UpdateAddressbutton);
             this.Controls.Add(this.addaddressbutton);
             this.Controls.Add(this.adduserbutton);
             this.Controls.Add(this.delete_address);
@@ -184,7 +196,7 @@
             this.Controls.Add(this.label_Users);
             this.Controls.Add(this.label_search);
             this.Controls.Add(this.searchbox);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.fetchbutton);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
@@ -200,10 +212,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button fetchbutton;
         private System.Windows.Forms.TextBox searchbox;
         private System.Windows.Forms.Label label_search;
         private System.Windows.Forms.Label label_Users;
@@ -212,6 +224,7 @@
         private System.Windows.Forms.Button delete_address;
         private System.Windows.Forms.Button adduserbutton;
         private System.Windows.Forms.Button addaddressbutton;
+        private System.Windows.Forms.Button UpdateAddressbutton;
     }
 }
 

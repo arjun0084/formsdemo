@@ -98,6 +98,14 @@ namespace GrpcClient {
         __Marshaller_Status);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::GrpcClient.Address, global::GrpcClient.Status> __Method_UpdateAddress = new grpc::Method<global::GrpcClient.Address, global::GrpcClient.Status>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "UpdateAddress",
+        __Marshaller_Address,
+        __Marshaller_Status);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::GrpcClient.Id, global::GrpcClient.Status> __Method_DeleteUser = new grpc::Method<global::GrpcClient.Id, global::GrpcClient.Status>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -167,6 +175,18 @@ namespace GrpcClient {
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::GrpcClient.Status> AddAddress(global::GrpcClient.Address request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      ///updates the selected Address
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::GrpcClient.Status> UpdateAddress(global::GrpcClient.Address request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -417,6 +437,54 @@ namespace GrpcClient {
         return CallInvoker.AsyncUnaryCall(__Method_AddAddress, null, options, request);
       }
       /// <summary>
+      ///updates the selected Address
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GrpcClient.Status UpdateAddress(global::GrpcClient.Address request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return UpdateAddress(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///updates the selected Address
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::GrpcClient.Status UpdateAddress(global::GrpcClient.Address request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_UpdateAddress, null, options, request);
+      }
+      /// <summary>
+      ///updates the selected Address
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GrpcClient.Status> UpdateAddressAsync(global::GrpcClient.Address request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return UpdateAddressAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///updates the selected Address
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::GrpcClient.Status> UpdateAddressAsync(global::GrpcClient.Address request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_UpdateAddress, null, options, request);
+      }
+      /// <summary>
       /// deletes the customer and its all addresses
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -530,6 +598,7 @@ namespace GrpcClient {
           .AddMethod(__Method_GetCustomersById, serviceImpl.GetCustomersById)
           .AddMethod(__Method_AddCustomer, serviceImpl.AddCustomer)
           .AddMethod(__Method_AddAddress, serviceImpl.AddAddress)
+          .AddMethod(__Method_UpdateAddress, serviceImpl.UpdateAddress)
           .AddMethod(__Method_DeleteUser, serviceImpl.DeleteUser)
           .AddMethod(__Method_DeleteAddress, serviceImpl.DeleteAddress).Build();
     }
@@ -545,6 +614,7 @@ namespace GrpcClient {
       serviceBinder.AddMethod(__Method_GetCustomersById, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcClient.Id, global::GrpcClient.AddressList>(serviceImpl.GetCustomersById));
       serviceBinder.AddMethod(__Method_AddCustomer, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcClient.Customer, global::GrpcClient.Status>(serviceImpl.AddCustomer));
       serviceBinder.AddMethod(__Method_AddAddress, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcClient.Address, global::GrpcClient.Status>(serviceImpl.AddAddress));
+      serviceBinder.AddMethod(__Method_UpdateAddress, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcClient.Address, global::GrpcClient.Status>(serviceImpl.UpdateAddress));
       serviceBinder.AddMethod(__Method_DeleteUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcClient.Id, global::GrpcClient.Status>(serviceImpl.DeleteUser));
       serviceBinder.AddMethod(__Method_DeleteAddress, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::GrpcClient.AddressId, global::GrpcClient.Status>(serviceImpl.DeleteAddress));
     }

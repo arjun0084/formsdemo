@@ -14,6 +14,8 @@ service CustomerData {
 
   rpc AddAddress(Address) returns(Status); // adds address for specific customer.
 
+  rpc UpdateAddress(Address) returns(Status);//updates the selected Address
+
   rpc DeleteUser(Id) returns (Status); // deletes the customer and its all addresses
 
   rpc DeleteAddress(AddressId) returns (Status); // deletes the address by address id.

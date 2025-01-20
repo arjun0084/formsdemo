@@ -15,10 +15,19 @@ namespace WindowsFormsClient
     public partial class AddAddressForm : Form
     {
         string uid;
+        string aid;
+        bool isupdate;
         public AddAddressForm(string userid)
         {
             InitializeComponent();
             uid = userid;
+        }
+
+        public AddAddressForm(string adressid,bool _isupdate)
+        {
+            InitializeComponent();
+            aid = adressid;
+            isupdate = _isupdate;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -30,34 +39,69 @@ namespace WindowsFormsClient
         {
             var channel = GrpcChannel.ForAddress("https://localhost:7105");
             var client = new CustomerData.CustomerDataClient(channel);
+            Status response;
 
-            Address ad = new Address()
+            if (isupdate)
             {
-                Building = textBox1.Text,
-                Area = textBox2.Text,
-                City = textBox3.Text,
-                State = textBox4.Text,
-                Pincode = textBox5.Text,
-                UserId = uid
-            };
+                Address ad = new Address()
+                {
+                    Building = textBox1.Text,
+                    Area = textBox2.Text,
+                    City = textBox3.Text,
+                    State = textBox4.Text,
+                    Pincode = textBox5.Text,
+                    Id=aid
+                };
+                 response = await client.UpdateAddressAsync(ad);
 
-            var response =await client.AddAddressAsync(ad);
+                if (response.Isfailed)
+                {
+                    MessageBox.Show(response.Errortxt, "Failed");
+                }
+                else if (response == null)
+                {
+                    MessageBox.Show("Null responce", "Failed");
 
-            if (response.Isfailed)
-            {
-                MessageBox.Show(response.Errortxt, "Failed");
-            }
-            else if (response == null)
-            {
-                MessageBox.Show("Null responce", "Failed");
+                }
+                else
+                {
+                    var result =MessageBox.Show("Address Updated sucessfully", "Successful",MessageBoxButtons.OK);
+                    if (result == DialogResult.OK)
+                    {
+                        this.Close();
+                    }
+                }
+
 
             }
             else
             {
-                MessageBox.Show("Address added sucessfully", "Successful");
+                Address ad = new Address()
+                {
+                    Building = textBox1.Text,
+                    Area = textBox2.Text,
+                    City = textBox3.Text,
+                    State = textBox4.Text,
+                    Pincode = textBox5.Text,
+                    UserId = uid
+                };
+                response = await client.AddAddressAsync(ad);
 
-               
+                if (response.Isfailed)
+                {
+                    MessageBox.Show(response.Errortxt, "Failed");
+                }
+                else if (response == null)
+                {
+                    MessageBox.Show("Null responce", "Failed");
 
+                }
+                else
+                {
+                    var result=MessageBox.Show("Address added sucessfully", "Successful");
+                    if (result == DialogResult.OK)
+                        { this.Close(); }
+                }
 
             }
         }

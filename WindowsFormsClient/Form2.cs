@@ -52,10 +52,9 @@ namespace WindowsFormsClient
             }
             else
             {
-                MessageBox.Show("User added sucessfully", "Successful");
-
+                var result=MessageBox.Show("User added sucessfully", "Successful");
+                if (result == DialogResult.OK) {this.Close(); }
                 
-               
             }
         }
     }
