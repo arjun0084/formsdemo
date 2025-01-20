@@ -1,8 +1,7 @@
 syntax = "proto3";
 
-option csharp_namespace = "GrpcService1";
+option csharp_namespace = "GrpcClient";
 
-package greet;
 
 // Customer sersvice defination.
 service CustomerData {
@@ -10,14 +9,26 @@ service CustomerData {
   rpc GetCustomers (Empty) returns (CustomerList);
 
   rpc GetCustomersById (Id) returns (AddressList); // returns list of address by accepting id
+
+  rpc AddCustomer(Customer) returns (Status); // adds new Customer to the database
+
+  rpc AddAddress(Address) returns(Status); // adds address for specific customer.
+
+  rpc DeleteUser(Id) returns (Status); // deletes the customer and its all addresses
+
+  rpc DeleteAddress(AddressId) returns (Status); // deletes the address by address id.
+
 }
 
 
 // customer structure
 message Customer {
 
-  string name = 1;
-  string id =2;
+  string id =1;
+  string first_name = 2;
+  string last_name= 3;
+  string dateofbirth = 4; //string temprory :|
+  
   
 }
 
@@ -26,8 +37,6 @@ message CustomerList {
   repeated Customer custometrs =1;
   bool isfailed = 2; // to check if any error occured in the grpc service
   string errortxt = 3;
-
-  
 }
 
 message Empty{} //for empty input
@@ -37,6 +46,12 @@ message Id  // The request msg for GetCustomersById
 	string user_id = 1;
 }
 
+message AddressId
+{
+	string address_id=1;
+}
+
+
 message Address  // structure of The address
 {
 	string building =1;
@@ -44,7 +59,8 @@ message Address  // structure of The address
 	string city =3;
 	string state =4;
 	string pincode =5;
-	
+	string id=6;
+	string user_id=7;
 }
 
 message AddressList //response of GetCustomersById
@@ -52,4 +68,11 @@ message AddressList //response of GetCustomersById
 	repeated Address addresses=1;
 	bool isfailed = 2;
 	string errortxt = 3;
+}
+
+
+message Status // response of DeleteAddress
+{
+	bool isfailed=1;
+	string errortxt=2;
 }

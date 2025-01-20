@@ -72,3 +72,4 @@ C:\Users\288223\source\repos\Assignment\GrpcService1\obj\Debug\net8.0\refint\Grp
 C:\Users\288223\source\repos\Assignment\GrpcService1\obj\Debug\net8.0\GrpcService1.pdb
 C:\Users\288223\source\repos\Assignment\GrpcService1\obj\Debug\net8.0\GrpcService1.genruntimeconfig.cache
 C:\Users\288223\source\repos\Assignment\GrpcService1\obj\Debug\net8.0\ref\GrpcService1.dll
+C:\Users\288223\source\repos\Assignment\GrpcService1\obj\Debug\net8.0\GrpcService1.sourcelink.json

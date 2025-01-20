@@ -39,3 +39,5 @@ C:\Users\288223\source\repos\Assignment\WindowsFormsClient\bin\Debug\System.Runt
 C:\Users\288223\source\repos\Assignment\WindowsFormsClient\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\288223\source\repos\Assignment\WindowsFormsClient\obj\Debug\WindowsFormsClient.Form1.resources
 C:\Users\288223\source\repos\Assignment\WindowsFormsClient\obj\Debug\WindowsF.8D929464.Up2Date
+C:\Users\288223\source\repos\Assignment\WindowsFormsClient\obj\Debug\WindowsFormsClient.Form2.resources
+C:\Users\288223\source\repos\Assignment\WindowsFormsClient\obj\Debug\WindowsFormsClient.AddAddressForm.resources

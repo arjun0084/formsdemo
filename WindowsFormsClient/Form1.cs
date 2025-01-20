@@ -17,79 +17,78 @@ namespace WindowsFormsClient
 {
     public partial class Form1 : Form
     {
-        string nametosearch = "";
-        
-        DataTable dt = new DataTable();
-        DataTable dt2 = new DataTable();
-        static GrpcChannel channel = GrpcChannel.ForAddress("https://localhost:7105");
-        CustomerData.CustomerDataClient client = new CustomerData.CustomerDataClient(channel);
+
+        private readonly DataTable dt_user = new DataTable(); // Data table for user grid
+        private readonly DataTable dt_address = new DataTable(); // Datatable for addresses gird
+        private readonly static GrpcChannel channel = GrpcChannel.ForAddress("https://localhost:7105"); // URL of the grpservice application
+        private readonly CustomerData.CustomerDataClient client = new CustomerData.CustomerDataClient(channel);//client to access grp functions
 
 
 
         public Form1()
         {
-            InitializeComponent();
-            dt.Columns.Add("Id");
-            dt.Columns.Add("Name");
-            dt2.Columns.Add("Building");
-            dt2.Columns.Add("Area");
-            dt2.Columns.Add("City");
-            dt2.Columns.Add("State");
-            dt2.Columns.Add("Pincode");
-            dataGridView2.DataSource = dt;
-            dataGridView1.DataSource = dt2;
-            loaddata();
+            InitializeComponent(); 
+
+            //columns for user table
+            dt_user.Columns.Add("Id");
+            dt_user.Columns.Add("First_Name");
+            dt_user.Columns.Add("Last_Name");
+            dt_user.Columns.Add("Date Of Birth");
+     
+
+
+            //columns for address table
+            dt_address.Columns.Add("Id");
+            dt_address.Columns.Add("Building");
+            dt_address.Columns.Add("Area");
+            dt_address.Columns.Add("City");
+            dt_address.Columns.Add("State");
+            dt_address.Columns.Add("Pincode");
+
+            
+
+            //adding datasources
+            dataGridView2.DataSource = dt_user; 
+            dataGridView1.DataSource = dt_address;
+            dataGridView2.Columns["Id"].Visible = false;//hiding unnecessary id column of the Users
+            dataGridView1.Columns["Id"].Visible = false;//hiding unnecessary id column of the address
+
+            //calling the function to load data received form grpc service in the datatable
+            Loaddata();
 
         }
 
-        public async  void loaddata()
+        public async  void Loaddata()
         {
-            
-
             try
             {
-                var response = await client.GetCustomersAsync(new Empty());
-                if (response == null)
-                {
-                    MessageBox.Show("Null response form grpc service");
-                }
-                if (response.Isfailed == true)
+                var response = await client.GetCustomersAsync(new Empty()); //passing empty msg and getting all users
+
+                //for error response from the grpcservice
+                if (response.Isfailed == true)  
                 {
                     MessageBox.Show(response.Errortxt);
-
                 }
-
                 else
                 {
                     var customers = response.Custometrs;
-
-
-                    dt.Rows.Clear();
-
+                    dt_user.Rows.Clear();
 
                     foreach (var customer in customers)
                     {
-                        dt.Rows.Add(customer.Id, customer.Name);
+                        dt_user.Rows.Add(customer.Id, customer.FirstName,customer.LastName,customer.Dateofbirth); // adding the datatable row with the data received
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-
             }
-
-
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e) // refresh/fetch button
         {
-
-            loaddata();
-            
-
-
-
+            Loaddata();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -102,17 +101,16 @@ namespace WindowsFormsClient
 
         }
 
-        private async void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e) // Button for fetching address
         {
             try
             {
-                Int32 selectedRowCount = dataGridView2.Rows.GetRowCount(DataGridViewElementStates.Selected);
-                    var row = dataGridView2.SelectedRows[0];
-                    var id = row.Cells[0].Value;
-                if (selectedRowCount > 0 && id!=null)
+                    var row = dataGridView2.SelectedRows[0]; // to get the selected row in user datatable , 0 represents the 1st selected row
+                    var id = row.Cells[0].Value; //extracting the value of the first column of the selected row
+                if (id!=null)
                 {
 
-                    Console.WriteLine(id);
+                    Console.WriteLine(id); //preparing request message for grpc service
                     Id idd = new Id()
                     {
                         UserId = id.ToString(),
@@ -121,11 +119,11 @@ namespace WindowsFormsClient
 
                     var response = await client.GetCustomersByIdAsync(idd);
                     var address = response.Addresses;
-                    dt2.Rows.Clear();
+                    dt_address.Rows.Clear();
 
                     foreach (var ad in address)
                     {
-                        dt2.Rows.Add(ad.Building, ad.Area, ad.City, ad.State, ad.Pincode);
+                        dt_address.Rows.Add(ad.Id,ad.Building, ad.Area, ad.City, ad.State, ad.Pincode);
                     }
 
                 }
@@ -137,15 +135,7 @@ namespace WindowsFormsClient
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
+      
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -159,12 +149,12 @@ namespace WindowsFormsClient
             if (!string.IsNullOrEmpty(searchValue))
             {
                 // Apply a filter to the DataTable's DefaultView
-                dt.DefaultView.RowFilter = $"Name LIKE '{searchValue}%'";
+                dt_user.DefaultView.RowFilter = $"First_Name or Last_Name LIKE '{searchValue}%'";
             }
             else
             {
                 // Clear the filter when the search box is empty
-                dt.DefaultView.RowFilter = string.Empty;
+                dt_user.DefaultView.RowFilter = string.Empty;
             }
 
 
@@ -188,7 +178,99 @@ namespace WindowsFormsClient
 
         }
 
-       
-       
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void DeleteCustomer_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var row = dataGridView2.SelectedRows[0];
+                var id = row.Cells[0].Value.ToString();
+
+                Id idd = new Id()
+                {
+                    UserId = id,
+                };
+
+                var response = await client.DeleteUserAsync(idd);
+                if (response.Isfailed)
+                {
+                    MessageBox.Show( response.Errortxt,("Failed"));
+                }
+                else
+                {
+                    MessageBox.Show("User Deleted Successfully");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+
+
+
+        }
+
+        private async void delete_address_Click(object sender, EventArgs e) // check for deleteall or nothing :|
+        {
+            try
+            {
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    var rows = dataGridView1.SelectedRows;
+
+                    foreach (DataGridViewRow row in rows)
+                    {
+                        string adr_id = row.Cells[0].Value.ToString();
+                        AddressId adressid = new AddressId() { AddressId_ = adr_id };
+                        var response = await client.DeleteAddressAsync(adressid);
+
+                        if (response.Isfailed)
+                        {
+                            MessageBox.Show(response.Errortxt + "for address: " + row.Cells["Building"], "Failed");
+                            break;
+                        }
+                    }
+                    MessageBox.Show("Address Deleted Sucessfully");
+                    button2_Click(sender, e);   
+
+                }
+                else
+                {
+                    MessageBox.Show("Select a row");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+          
+
+        }
+
+        private void adduserbutton_Click(object sender, EventArgs e)
+        {
+            Form2 f = new Form2();
+            f.Show();
+        }
+
+        private void addaddressbutton_Click(object sender, EventArgs e)
+        {
+            var row = dataGridView2.SelectedRows[0];
+            string address_id = row.Cells[0].Value.ToString();
+
+            AddAddressForm form = new AddAddressForm(address_id);
+            form.Show();
+        }
     }
 }
