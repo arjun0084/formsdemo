@@ -69,6 +69,7 @@ namespace WindowsFormsClient
                     if (result == DialogResult.OK)
                     {
                         this.Close();
+                       
                     }
                 }
 
@@ -100,7 +101,11 @@ namespace WindowsFormsClient
                 {
                     var result=MessageBox.Show("Address added sucessfully", "Successful");
                     if (result == DialogResult.OK)
-                        { this.Close(); }
+                    { 
+                        this.Close(); 
+                    
+                    
+                    }
                 }
 
             }

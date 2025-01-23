@@ -1,3 +1,4 @@
+using GrpcService1.Data;
 using GrpcService1.Services;
 
 namespace GrpcService1
@@ -10,6 +11,10 @@ namespace GrpcService1
 
             // Add services to the container.
             builder.Services.AddGrpc();
+
+            builder.Services.AddTransient<ISqlService,SqlService>();
+
+           
 
             var app = builder.Build();
 

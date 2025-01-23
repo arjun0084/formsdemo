@@ -93,21 +93,50 @@ namespace WindowsFormsClient
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+           
         }
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
+                var row = dataGridView2.SelectedRows[0]; // to get the selected row in user datatable , 0 represents the 1st selected row
+                var id = row.Cells[0].Value; //extracting the value of the first column of the selected row
+                if (id != null)
+                {
 
+                    Console.WriteLine(id); //preparing request message for grpc service
+                    Id idd = new Id()
+                    {
+                        UserId = id.ToString(),
+                    };
+
+
+                    var response = client.GetCustomersById(idd);
+                    var address = response.Addresses;
+                    dt_address.Rows.Clear();
+
+                    foreach (var ad in address)
+                    {
+                        dt_address.Rows.Add(ad.Id, ad.Building, ad.Area, ad.City, ad.State, ad.Pincode);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
         }
 
         private async void button2_Click(object sender, EventArgs e) // Button for fetching address
         {
             try
             {
-                    var row = dataGridView2.SelectedRows[0]; // to get the selected row in user datatable , 0 represents the 1st selected row
-                    var id = row.Cells[0].Value; //extracting the value of the first column of the selected row
-                if (id!=null)
+                var row = dataGridView2.SelectedRows[0]; // to get the selected row in user datatable , 0 represents the 1st selected row
+                var id = row.Cells[0].Value; //extracting the value of the first column of the selected row
+                if (id != null)
                 {
 
                     Console.WriteLine(id); //preparing request message for grpc service
@@ -123,7 +152,7 @@ namespace WindowsFormsClient
 
                     foreach (var ad in address)
                     {
-                        dt_address.Rows.Add(ad.Id,ad.Building, ad.Area, ad.City, ad.State, ad.Pincode);
+                        dt_address.Rows.Add(ad.Id, ad.Building, ad.Area, ad.City, ad.State, ad.Pincode);
                     }
 
                 }
@@ -142,7 +171,7 @@ namespace WindowsFormsClient
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e) // serachinf functuinality 
         {
             string searchValue = searchbox.Text.Trim();
 
@@ -159,7 +188,7 @@ namespace WindowsFormsClient
             }
 
 
-            dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect; 
             try
             {
                 foreach (DataGridViewRow row in dataGridView2.Rows)
@@ -174,7 +203,7 @@ namespace WindowsFormsClient
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message, "error");
             }
 
         }
@@ -189,26 +218,34 @@ namespace WindowsFormsClient
 
         }
 
-        private async void DeleteCustomer_Click(object sender, EventArgs e)
+        private async void DeleteCustomer_Click(object sender, EventArgs e) // delete customer button
         {
             try
             {
-                var row = dataGridView2.SelectedRows[0];
-                var id = row.Cells[0].Value.ToString();
+                var resp = MessageBox.Show("Are you sure you want to delete the User", "Confirm", MessageBoxButtons.YesNoCancel);
 
-                Id idd = new Id()
+                if (resp== DialogResult.Yes)
                 {
-                    UserId = id,
-                };
+                    //get selected row and the value of id column(hidden)
+                    var row = dataGridView2.SelectedRows[0];
+                    var id = row.Cells[0].Value.ToString();
 
-                var response = await client.DeleteUserAsync(idd);
-                if (response.Isfailed)
-                {
-                    MessageBox.Show( response.Errortxt,("Failed"));
-                }
-                else
-                {
-                    MessageBox.Show("User Deleted Successfully");
+                    Id idd = new Id()
+                    {
+                        UserId = id,
+                    };
+
+                    var response = await client.DeleteUserAsync(idd);
+                    if (response.Isfailed)
+                    {
+                        MessageBox.Show(response.Errortxt, ("Failed"));
+                    }
+                    else
+                    {
+                        MessageBox.Show("User Deleted Successfully");
+                        Button1_Click(sender, e);
+                        dt_address.Rows.Clear();
+                    } 
                 }
             }
             catch (Exception ex)
@@ -225,34 +262,40 @@ namespace WindowsFormsClient
         {
             try
             {
-                if (dataGridView1.SelectedRows.Count > 0)
+                var resp = MessageBox.Show("Are you sure you want to delete the address", "Confirm", MessageBoxButtons.YesNo);
+                if (resp == DialogResult.Yes)
                 {
-                    var rows = dataGridView1.SelectedRows;
 
-                    foreach (DataGridViewRow row in rows)
+                    if (dataGridView1.SelectedRows.Count > 0)
                     {
-                        string adr_id = row.Cells[0].Value.ToString();
-                        AddressId adressid = new AddressId() { AddressId_ = adr_id };
-                        var response = await client.DeleteAddressAsync(adressid);
+                        var rows = dataGridView1.SelectedRows;
 
-                        if (response.Isfailed)
+                        foreach (DataGridViewRow row in rows)
                         {
-                            MessageBox.Show(response.Errortxt + "for address: " + row.Cells["Building"], "Failed");
-                            break;
-                        }
-                    }
-                  
-                    var result =MessageBox.Show("Address Deleted Sucessfully","Successful",MessageBoxButtons.OK);
-                    if (result == DialogResult.OK)
-                    {
-                        button2_Click(sender, e);
-                    }
-                    
+                            string adr_id = row.Cells[0].Value.ToString();
+                            AddressId adressid = new AddressId() { AddressId_ = adr_id };
+                            var response = await client.DeleteAddressAsync(adressid);
 
-                }
-                else
-                {
-                    MessageBox.Show("Select a row");
+                            if (response.Isfailed)
+                            {
+                                MessageBox.Show(response.Errortxt + "for address: " + row.Cells["Building"], "Failed");
+                                break;
+                            }
+                        }
+
+                        var result = MessageBox.Show("Address Deleted Sucessfully", "Successful", MessageBoxButtons.OK);
+                        if (result == DialogResult.OK)
+                        {
+                            button2_Click(sender, e);
+                        }
+
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Select a row");
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -264,42 +307,82 @@ namespace WindowsFormsClient
 
         }
 
-        private void adduserbutton_Click(object sender, EventArgs e)
+        private void adduserbutton_Click(object sender, EventArgs e) //add user button 
         {
-            Form2 f = new Form2();
-            f.Show();
+            try
+            {
+                Form2 f = new Form2(); //creats add user form
+                f.FormClosed += (s, args) => { refreshbutton.PerformClick(); }; //refresh button clicked after closed
+                f.Show();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error");
+            }
+
         }
 
-        private void addaddressbutton_Click(object sender, EventArgs e)
+        private void F_FormClosed(object sender, FormClosedEventArgs e)
         {
-            int count = dataGridView2.SelectedRows.Count;
-            if (count > 0)
-            {
-                var row = dataGridView2.SelectedRows[0];
-                string user_id = row.Cells[0].Value.ToString();
+            throw new NotImplementedException();
+        }
 
-                AddAddressForm form = new AddAddressForm(user_id);
-                form.Show();
+        private void addaddressbutton_Click(object sender, EventArgs e) // button for adding address for selected uesr
+        {
+            try
+            {
+                int count = dataGridView2.SelectedRows.Count;  //get selected row
+                if (count > 0)
+                {
+                    var row = dataGridView2.SelectedRows[0];
+                    string user_id = row.Cells[0].Value.ToString();//extract userid
+
+                    AddAddressForm form = new AddAddressForm(user_id);
+
+                    //fetch button clicked after form closed
+                    form.FormClosed += (s, arge) =>
+                    {
+                        fetchbutton.PerformClick();
+                    };
+                    form.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
             }
         }
 
-        private void UpdateAddressbutton_Click(object sender, EventArgs e)
+        private void UpdateAddressbutton_Click(object sender, EventArgs e)// update button
         {
-            int count = dataGridView1.SelectedRows.Count;
-            if (count>0)
+            try
             {
-                
-                var row = dataGridView1.SelectedRows[0];
-                string address_id = row.Cells[0].Value.ToString();
+                int count = dataGridView1.SelectedRows.Count;
+                if (count == 1) //if only one row is selected
+                {
+                    //exxtracting the address id of selected row
+                    var row = dataGridView1.SelectedRows[0];
+                    string address_id = row.Cells[0].Value.ToString();
 
-                AddAddressForm form = new AddAddressForm(address_id,true);
-                form.textBox1.Text = row.Cells[1].Value.ToString();
-                form.textBox2.Text = row.Cells[2].Value.ToString();
-                form.textBox3.Text = row.Cells[3].Value.ToString();
-                form.textBox4.Text = row.Cells[4].Value.ToString();
-                form.textBox5.Text = row.Cells[5].Value.ToString();
-                form.button1.Text = "Update Address";
-                form.Show(); 
+                    AddAddressForm form = new AddAddressForm(address_id, true);
+                    form.textBox1.Text = row.Cells[1].Value.ToString();
+                    form.textBox2.Text = row.Cells[2].Value.ToString();
+                    form.textBox3.Text = row.Cells[3].Value.ToString();
+                    form.textBox4.Text = row.Cells[4].Value.ToString();
+                    form.textBox5.Text = row.Cells[5].Value.ToString();
+                    form.button1.Text = "Update Address";
+                    form.FormClosed += (s, arge) =>
+                    {
+                        fetchbutton.PerformClick();
+                    };
+                    form.Show();
+                }
+            }
+            catch (Exception ex )
+            {
+
+                MessageBox.Show(ex.Message, "Error");
             }
         }
     }

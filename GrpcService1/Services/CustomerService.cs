@@ -1,53 +1,45 @@
 using Grpc.Core;
 using GrpcService1;
+using GrpcService1.Data;
 using Microsoft.Data.SqlClient;
 
 namespace GrpcService1.Services
 {
     public class CustomerDataService : CustomerData.CustomerDataBase
     {
-        private readonly ILogger<CustomerDataService> _logger;
-        public CustomerDataService(ILogger<CustomerDataService> logger)
+        public readonly ISqlService _sqlService;
+        public CustomerDataService(ISqlService sqlservice)
         {
-            _logger = logger;
+            _sqlService = sqlservice;
         }
 
-        string connectionstring = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Customer;Integrated Security=True;";
+        private readonly string connectionstring = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Customer;Integrated Security=True;"; // connection string for sql connection
 
 
         //service defination for  rpc function GetCustomers
         public override async Task<CustomerList> GetCustomers(Empty request, ServerCallContext context)
         {
-            CustomerList customerList = new CustomerList(); //Initialing return list
+            CustomerList customerList = new(); //Initialing return list
             try
             {
-                using (SqlConnection con = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Customer;Integrated Security=True;"))
-                {
-                    await con.OpenAsync();
+                
 
-                    using (SqlCommand cmd = new SqlCommand("get", con))
+                using IDataReader reader=await _sqlService.ExecuteTheReader("get", null);
+
+                    while (await reader.ReadAsync())
                     {
-                        cmd.CommandType = System.Data.CommandType.StoredProcedure; // calling stored procedure named 'get'.
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        var customer = new Customer()
                         {
+                            FirstName = reader.GetString("First_Name"),
+                            LastName = reader.GetString("Last_Name"),
+                            Dateofbirth = reader.GetString("Date_of_Birth"),
+                            Id = reader.GetString("Id"),
 
+                        };
+                        customerList.Custometrs.Add(customer);  // maping customer data customer object and adding it to list
 
-                            while (await reader.ReadAsync())
-                            {
-                                var customer = new Customer()
-                                {
-                                    FirstName = reader["First_Name"].ToString(),
-                                    LastName = reader["Last_Name"].ToString(),
-                                    Dateofbirth = reader["Date_of_Birth"].ToString(),
-                                    Id = reader["Id"].ToString(),
-
-                                };
-                                customerList.Custometrs.Add(customer);  // maping customer data customer object and adding it to list
-
-                            }
-                        }
                     }
-                }
+                //}
                 return customerList;
             }
             catch (Exception e)
@@ -67,36 +59,31 @@ namespace GrpcService1.Services
         //service defination for  rpc function GetCustomer
         public async override Task<AddressList> GetCustomersById(Id request, ServerCallContext context)
         {
-            AddressList addresslist = new AddressList(); // initializing data which we have to return
+            AddressList addresslist = new (); // initializing data which we have to return
             try
             {
                 var custid = request.UserId;
-                using (SqlConnection con = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Customer;Integrated Security=True;"))
+                using (SqlConnection con = new("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Customer;Integrated Security=True;"))
                 {
                     await con.OpenAsync();
 
-                    using (SqlCommand cmd = new SqlCommand($"exec getaddress @_id={custid}", con)) // passing the id to stored procedure named getaddress.
+                    using SqlCommand cmd = new ($"exec getaddress @_id={custid}", con); // passing the id to stored procedure named getaddress.
+
+                    using SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (await reader.ReadAsync())
                     {
-                        
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        var address = new Address()
                         {
+                            Building = reader["Building"].ToString(),
+                            Area = reader["Area"].ToString(),
+                            City = reader["City"].ToString(),
+                            State = reader["State"].ToString(),
+                            Pincode = reader["Pincode"].ToString(),
+                            Id = reader["Id"].ToString()
+                        };
+                        addresslist.Addresses.Add(address);// mapping the data and adding to the list.
 
-
-                            while (await reader.ReadAsync())
-                            {
-                                var address = new Address()
-                                {
-                                    Building = reader["Building"].ToString(),
-                                    Area = reader["Area"].ToString(),
-                                    City = reader["City"].ToString(),
-                                    State = reader["State"].ToString(),
-                                    Pincode = reader["Pincode"].ToString(),
-                                    Id=reader["Id"].ToString()
-                                };
-                                addresslist.Addresses.Add(address);// mapping the data and adding to the list.
-
-                            }
-                        }
                     }
                 }
                 return addresslist;
@@ -111,13 +98,13 @@ namespace GrpcService1.Services
         }
 
 
-
+        //service defination for rpc function deleteuser
         public async override Task<Status> DeleteUser(Id request, ServerCallContext context)
         {
             try
             {
-                var custid = request.UserId.ToString();
-                using SqlConnection conn = new("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Customer;Integrated Security=True;");
+                var custid = request.UserId.ToString();//to delete user by user id
+                using SqlConnection conn = new(connectionstring);
                 await conn.OpenAsync();
 
 
@@ -127,7 +114,7 @@ namespace GrpcService1.Services
                 cmd.Parameters.Add(new SqlParameter("@_id", custid));
 
                 var rowsaffected = cmd.ExecuteNonQuery();
-                if (rowsaffected >= 0)
+                if (rowsaffected >= 0) //sucess
                 {
                     Status status = new();
                     return status;
@@ -154,13 +141,14 @@ namespace GrpcService1.Services
         }
 
 
-
+        //service defination for rpc function DeleteAddress
+        //it deletes the address by addressid
         public async override  Task<Status> DeleteAddress(AddressId request, ServerCallContext context)
         {
             try
             {
-                var id = request.AddressId_;
-                using SqlConnection conn = new("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Customer;Integrated Security=True;");
+                var id = request.AddressId_; 
+                using SqlConnection conn = new(connectionstring);
                 await conn.OpenAsync();
                 using SqlCommand cmd = new("deleteaddress", conn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -191,10 +179,13 @@ namespace GrpcService1.Services
         }
 
 
+
+        //service defination for adding the customer
         public async override Task<Status> AddCustomer(Customer request, ServerCallContext context)
         {
             try
             {
+                //defining the values for creating a new customer
                 string f_name = request.FirstName;
                 string s_name = request.LastName;
                 DateOnly dob = DateOnly.ParseExact(request.Dateofbirth,"dd/MM/yyyy");
@@ -231,11 +222,15 @@ namespace GrpcService1.Services
         }
 
 
+
+        //service defination for rpc defination addaddress
+        //adds address for specified customer 
         public async override Task<Status> AddAddress(Address request, ServerCallContext context)
         {
 
             try
             {
+                //assigning data required to add address
                 int userid = int.Parse(request.UserId);
                 string building = request.Building;
                 string area = request.Area;
@@ -244,7 +239,7 @@ namespace GrpcService1.Services
                 int pincode = int.Parse(request.Pincode);
 
 
-                using SqlConnection conn = new SqlConnection(connectionstring);
+                using SqlConnection conn = new (connectionstring);
                 using SqlCommand cmd = new("addaddress", conn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@userid", userid));
@@ -277,6 +272,9 @@ namespace GrpcService1.Services
         }
 
 
+
+        //service defination for rpc function updateaddress
+        //updates selected address
         public async override Task<Status> UpdateAddress(Address request, ServerCallContext context)
         {
             try

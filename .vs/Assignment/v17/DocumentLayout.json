@@ -3,24 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\288223\\source\\repos\\Assignment\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{21BAB1C8-44C2-498E-9C2B-F09C246D4521}|WindowsFormsClient\\WindowsFormsClient.csproj|c:\\users\\288223\\source\\repos\\assignment\\windowsformsclient\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21BAB1C8-44C2-498E-9C2B-F09C246D4521}|WindowsFormsClient\\WindowsFormsClient.csproj|solutionrelative:windowsformsclient\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{040BFAA5-9A6F-4C26-9A96-3D8E93FE2F98}|GrpcService1\\GrpcService1.csproj|c:\\users\\288223\\source\\repos\\assignment\\grpcservice1\\services\\customerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{040BFAA5-9A6F-4C26-9A96-3D8E93FE2F98}|GrpcService1\\GrpcService1.csproj|solutionrelative:grpcservice1\\services\\customerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21BAB1C8-44C2-498E-9C2B-F09C246D4521}|WindowsFormsClient\\WindowsFormsClient.csproj|c:\\users\\288223\\source\\repos\\assignment\\windowsformsclient\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{21BAB1C8-44C2-498E-9C2B-F09C246D4521}|WindowsFormsClient\\WindowsFormsClient.csproj|solutionrelative:windowsformsclient\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{040BFAA5-9A6F-4C26-9A96-3D8E93FE2F98}|GrpcService1\\GrpcService1.csproj|c:\\users\\288223\\source\\repos\\assignment\\grpcservice1\\data\\sqlservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{040BFAA5-9A6F-4C26-9A96-3D8E93FE2F98}|GrpcService1\\GrpcService1.csproj|solutionrelative:grpcservice1\\data\\sqlservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21BAB1C8-44C2-498E-9C2B-F09C246D4521}|WindowsFormsClient\\WindowsFormsClient.csproj|c:\\users\\288223\\source\\repos\\assignment\\windowsformsclient\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21BAB1C8-44C2-498E-9C2B-F09C246D4521}|WindowsFormsClient\\WindowsFormsClient.csproj|solutionrelative:windowsformsclient\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{15B543ED-982F-493B-97BF-80A50CDEE8C4}|grpctesting\\grpctesting.csproj|c:\\users\\288223\\source\\repos\\assignment\\grpctesting\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15B543ED-982F-493B-97BF-80A50CDEE8C4}|grpctesting\\grpctesting.csproj|solutionrelative:grpctesting\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21BAB1C8-44C2-498E-9C2B-F09C246D4521}|WindowsFormsClient\\WindowsFormsClient.csproj|c:\\users\\288223\\source\\repos\\assignment\\windowsformsclient\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{21BAB1C8-44C2-498E-9C2B-F09C246D4521}|WindowsFormsClient\\WindowsFormsClient.csproj|solutionrelative:windowsformsclient\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{040BFAA5-9A6F-4C26-9A96-3D8E93FE2F98}|GrpcService1\\GrpcService1.csproj|c:\\users\\288223\\source\\repos\\assignment\\grpcservice1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{040BFAA5-9A6F-4C26-9A96-3D8E93FE2F98}|GrpcService1\\GrpcService1.csproj|solutionrelative:grpcservice1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21BAB1C8-44C2-498E-9C2B-F09C246D4521}|WindowsFormsClient\\WindowsFormsClient.csproj|c:\\users\\288223\\source\\repos\\assignment\\windowsformsclient\\protos\\customer.proto||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{21BAB1C8-44C2-498E-9C2B-F09C246D4521}|WindowsFormsClient\\WindowsFormsClient.csproj|solutionrelative:windowsformsclient\\protos\\customer.proto||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{040BFAA5-9A6F-4C26-9A96-3D8E93FE2F98}|GrpcService1\\GrpcService1.csproj|c:\\users\\288223\\source\\repos\\assignment\\grpcservice1\\data\\isqlservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{040BFAA5-9A6F-4C26-9A96-3D8E93FE2F98}|GrpcService1\\GrpcService1.csproj|solutionrelative:grpcservice1\\data\\isqlservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{040BFAA5-9A6F-4C26-9A96-3D8E93FE2F98}|GrpcService1\\GrpcService1.csproj|c:\\users\\288223\\source\\repos\\assignment\\grpcservice1\\data\\datareaderwrapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{040BFAA5-9A6F-4C26-9A96-3D8E93FE2F98}|GrpcService1\\GrpcService1.csproj|solutionrelative:grpcservice1\\data\\datareaderwrapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{040BFAA5-9A6F-4C26-9A96-3D8E93FE2F98}|GrpcService1\\GrpcService1.csproj|c:\\users\\288223\\source\\repos\\assignment\\grpcservice1\\data\\idatareader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{040BFAA5-9A6F-4C26-9A96-3D8E93FE2F98}|GrpcService1\\GrpcService1.csproj|solutionrelative:grpcservice1\\data\\idatareader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,69 +38,97 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\288223\\source\\repos\\Assignment\\WindowsFormsClient\\Form1.cs",
-              "RelativeDocumentMoniker": "WindowsFormsClient\\Form1.cs",
-              "ToolTip": "C:\\Users\\288223\\source\\repos\\Assignment\\WindowsFormsClient\\Form1.cs",
-              "RelativeToolTip": "WindowsFormsClient\\Form1.cs",
-              "ViewState": "AgIAAP8AAAAAAAAAAAASwA0BAAAVAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\288223\\source\\repos\\Assignment\\GrpcService1\\Program.cs",
+              "RelativeDocumentMoniker": "GrpcService1\\Program.cs",
+              "ToolTip": "C:\\Users\\288223\\source\\repos\\Assignment\\GrpcService1\\Program.cs",
+              "RelativeToolTip": "GrpcService1\\Program.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwA4AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-20T11:29:19.254Z",
+              "WhenOpened": "2025-01-23T06:30:33.458Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ISqlService.cs",
+              "DocumentMoniker": "C:\\Users\\288223\\source\\repos\\Assignment\\GrpcService1\\Data\\ISqlService.cs",
+              "RelativeDocumentMoniker": "GrpcService1\\Data\\ISqlService.cs",
+              "ToolTip": "C:\\Users\\288223\\source\\repos\\Assignment\\GrpcService1\\Data\\ISqlService.cs",
+              "RelativeToolTip": "GrpcService1\\Data\\ISqlService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-22T12:52:51.081Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Form2.cs",
-              "DocumentMoniker": "C:\\Users\\288223\\source\\repos\\Assignment\\WindowsFormsClient\\Form2.cs",
-              "RelativeDocumentMoniker": "WindowsFormsClient\\Form2.cs",
-              "ToolTip": "C:\\Users\\288223\\source\\repos\\Assignment\\WindowsFormsClient\\Form2.cs",
-              "RelativeToolTip": "WindowsFormsClient\\Form2.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAgwDgAAAAQAAAAAAAAAA==",
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "C:\\Users\\288223\\source\\repos\\Assignment\\grpctesting\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "grpctesting\\UnitTest1.cs",
+              "ToolTip": "C:\\Users\\288223\\source\\repos\\Assignment\\grpctesting\\UnitTest1.cs",
+              "RelativeToolTip": "grpctesting\\UnitTest1.cs",
+              "ViewState": "AgIAAJYAAAAAAAAAAAAUwKwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-20T11:25:07.942Z",
+              "WhenOpened": "2025-01-22T12:26:14.243Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Form2.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\288223\\source\\repos\\Assignment\\WindowsFormsClient\\Form2.cs",
-              "RelativeDocumentMoniker": "WindowsFormsClient\\Form2.cs",
-              "ToolTip": "C:\\Users\\288223\\source\\repos\\Assignment\\WindowsFormsClient\\Form2.cs [Design]",
-              "RelativeToolTip": "WindowsFormsClient\\Form2.cs [Design]",
+              "DocumentIndex": 5,
+              "Title": "DataReaderWrapper.cs",
+              "DocumentMoniker": "C:\\Users\\288223\\source\\repos\\Assignment\\GrpcService1\\Data\\DataReaderWrapper.cs",
+              "RelativeDocumentMoniker": "GrpcService1\\Data\\DataReaderWrapper.cs",
+              "ToolTip": "C:\\Users\\288223\\source\\repos\\Assignment\\GrpcService1\\Data\\DataReaderWrapper.cs",
+              "RelativeToolTip": "GrpcService1\\Data\\DataReaderWrapper.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAswB0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-20T11:24:41.995Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-01-22T12:12:25.84Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\288223\\source\\repos\\Assignment\\WindowsFormsClient\\Form1.cs",
-              "RelativeDocumentMoniker": "WindowsFormsClient\\Form1.cs",
-              "ToolTip": "C:\\Users\\288223\\source\\repos\\Assignment\\WindowsFormsClient\\Form1.cs [Design]",
-              "RelativeToolTip": "WindowsFormsClient\\Form1.cs [Design]",
+              "Title": "SqlService.cs",
+              "DocumentMoniker": "C:\\Users\\288223\\source\\repos\\Assignment\\GrpcService1\\Data\\SqlService.cs",
+              "RelativeDocumentMoniker": "GrpcService1\\Data\\SqlService.cs",
+              "ToolTip": "C:\\Users\\288223\\source\\repos\\Assignment\\GrpcService1\\Data\\SqlService.cs",
+              "RelativeToolTip": "GrpcService1\\Data\\SqlService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-20T09:45:15.029Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-01-22T12:01:13.098Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "customer.proto",
-              "DocumentMoniker": "C:\\Users\\288223\\source\\repos\\Assignment\\WindowsFormsClient\\Protos\\customer.proto",
-              "RelativeDocumentMoniker": "WindowsFormsClient\\Protos\\customer.proto",
-              "ToolTip": "C:\\Users\\288223\\source\\repos\\Assignment\\WindowsFormsClient\\Protos\\customer.proto",
-              "RelativeToolTip": "WindowsFormsClient\\Protos\\customer.proto",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFAAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003853|",
-              "WhenOpened": "2025-01-20T09:44:43.6Z",
+              "DocumentIndex": 6,
+              "Title": "IDataReader.cs",
+              "DocumentMoniker": "C:\\Users\\288223\\source\\repos\\Assignment\\GrpcService1\\Data\\IDataReader.cs",
+              "RelativeDocumentMoniker": "GrpcService1\\Data\\IDataReader.cs",
+              "ToolTip": "C:\\Users\\288223\\source\\repos\\Assignment\\GrpcService1\\Data\\IDataReader.cs",
+              "RelativeToolTip": "GrpcService1\\Data\\IDataReader.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-22T12:01:08.613Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CustomerService.cs",
+              "DocumentMoniker": "C:\\Users\\288223\\source\\repos\\Assignment\\GrpcService1\\Services\\CustomerService.cs",
+              "RelativeDocumentMoniker": "GrpcService1\\Services\\CustomerService.cs",
+              "ToolTip": "C:\\Users\\288223\\source\\repos\\Assignment\\GrpcService1\\Services\\CustomerService.cs",
+              "RelativeToolTip": "GrpcService1\\Services\\CustomerService.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAUwC0AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-22T12:00:50.708Z",
               "EditorCaption": ""
             }
           ]
